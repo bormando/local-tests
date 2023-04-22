@@ -1,0 +1,13 @@
+{
+  "name": "local-tests",
+  "version": "1.0.0",
+  "description": "Cypress end-to-end tests for localcoding",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
+  "author": "Dmitrii Bormotov",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.10.0"
+  }
+}
