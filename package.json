@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Cypress end-to-end tests for localcoding",
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "author": "Dmitrii Bormotov",
   "license": "ISC",

@@ -1,7 +1,9 @@
 describe('Auth', () => {
-  it('Sign in with valid credentials', () => {
+  beforeEach(() => {
     cy.visit('https://localcoding.us/user/login')
+  })
 
+  it('Sign in with valid credentials', () => {
     cy.get('#normal_login_email').type('test@example.com')
     cy.get('#normal_login_password').type('Qwerty!23')
     cy.get('.login-form-button').click()
@@ -10,8 +12,6 @@ describe('Auth', () => {
   })
 
   it('Sign in with incorrect credentials', () => {
-    cy.visit('https://localcoding.us/user/login')
-
     cy.get('#normal_login_email').type('test@example.com')
     cy.get('#normal_login_password').type('123456')
     cy.get('.login-form-button').click()
@@ -22,8 +22,6 @@ describe('Auth', () => {
   })
 
   it('Sign in form validation', () => {
-    cy.visit('https://localcoding.us/user/login')
-
     cy.get('#normal_login_email').should('have.value', '')
     cy.get('#normal_login_password').should('have.value', '')
     cy.get('.login-form-button').should('be.disabled')
