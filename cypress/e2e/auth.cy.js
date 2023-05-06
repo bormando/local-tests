@@ -1,18 +1,18 @@
 describe('Auth', () => {
   beforeEach(() => {
-    cy.visit('https://localcoding.us/user/login')
+    cy.visit('/user/login')
   })
 
   it('Sign in with valid credentials', () => {
-    cy.get('#normal_login_email').type('test@example.com')
-    cy.get('#normal_login_password').type('Qwerty!23')
+    cy.get('#normal_login_email').type(Cypress.env('email'))
+    cy.get('#normal_login_password').type(Cypress.env('password'))
     cy.get('.login-form-button').click()
 
     cy.get('.ant-avatar-square').should('be.visible')
   })
 
   it('Sign in with incorrect credentials', () => {
-    cy.get('#normal_login_email').type('test@example.com')
+    cy.get('#normal_login_email').type(Cypress.env('email'))
     cy.get('#normal_login_password').type('123456')
     cy.get('.login-form-button').click()
 
@@ -59,15 +59,11 @@ describe('Auth', () => {
     cy.get('.login-form-button').should('be.enabled')
 
     cy.get('#normal_login_email').clear()
-    cy.get('#normal_login_email_help')
-      .should('have.text', 'Required')
-      .should('be.visible')
+    cy.get('#normal_login_email_help').should('have.text', 'Required').should('be.visible')
     cy.get('.login-form-button').should('be.disabled')
 
     cy.get('#normal_login_password').clear()
-    cy.get('#normal_login_password_help')
-      .should('have.text', 'Required')
-      .should('be.visible')
+    cy.get('#normal_login_password_help').should('have.text', 'Required').should('be.visible')
     cy.get('.login-form-button').should('be.disabled')
   })
 })

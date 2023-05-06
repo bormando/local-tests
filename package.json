@@ -4,11 +4,14 @@
   "description": "Cypress end-to-end tests for localcoding",
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "format": "prettier . --write --list-different",
+    "lint": "prettier . --check"
   },
   "author": "Dmitrii Bormotov",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^12.10.0"
+    "cypress": "^12.10.0",
+    "prettier": "^2.8.8"
   }
 }
