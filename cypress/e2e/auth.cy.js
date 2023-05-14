@@ -1,20 +1,18 @@
+import SignInPage from '../pages/sign-in'
+import ProfilePage from '../pages/profile'
+
 describe('Auth', () => {
   beforeEach(() => {
-    cy.visit('/user/login')
+    SignInPage.open()
   })
 
   it('Sign in with valid credentials', () => {
-    cy.get('#normal_login_email').type(Cypress.env('email'))
-    cy.get('#normal_login_password').type(Cypress.env('password'))
-    cy.get('.login-form-button').click()
-
-    cy.get('.ant-avatar-square').should('be.visible')
+    SignInPage.signIn(Cypress.env('email'), Cypress.env('password'))
+    ProfilePage.imageAvatar.should('be.visible')
   })
 
   it('Sign in with incorrect credentials', () => {
-    cy.get('#normal_login_email').type(Cypress.env('email'))
-    cy.get('#normal_login_password').type('123456')
-    cy.get('.login-form-button').click()
+    SignInPage.signIn(Cypress.env('email'), '123456')
 
     cy.get('.ant-notification-notice-message')
       .should('have.text', 'Auth failed')
@@ -22,48 +20,48 @@ describe('Auth', () => {
   })
 
   it('Sign in form validation', () => {
-    cy.get('#normal_login_email').should('have.value', '')
-    cy.get('#normal_login_password').should('have.value', '')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.inputEmail.should('have.value', '')
+    SignInPage.inputPassword.should('have.value', '')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_password').type('test')
-    cy.get('#normal_login_password_help').should('not.exist')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.inputPassword.type('test')
+    SignInPage.labelValidationPassword.should('not.exist')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_email').type('test')
-    cy.get('#normal_login_email_help')
+    SignInPage.inputEmail.type('test')
+    SignInPage.labelValidationEmail
       .should('have.text', `'email' is not a valid email`)
       .should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_email').type('@')
-    cy.get('#normal_login_email_help')
+    SignInPage.inputEmail.type('@')
+    SignInPage.labelValidationEmail
       .should('have.text', `'email' is not a valid email`)
       .should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_email').type('example')
-    cy.get('#normal_login_email_help')
+    SignInPage.inputEmail.type('example')
+    SignInPage.labelValidationEmail
       .should('have.text', `'email' is not a valid email`)
       .should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_email').type('.')
-    cy.get('#normal_login_email_help')
+    SignInPage.inputEmail.type('.')
+    SignInPage.labelValidationEmail
       .should('have.text', `'email' is not a valid email`)
       .should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_email').type('com')
-    cy.get('#normal_login_email_help').should('not.exist')
-    cy.get('.login-form-button').should('be.enabled')
+    SignInPage.inputEmail.type('com')
+    SignInPage.labelValidationEmail.should('not.exist')
+    SignInPage.buttonSubmit.should('be.enabled')
 
-    cy.get('#normal_login_email').clear()
-    cy.get('#normal_login_email_help').should('have.text', 'Required').should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.inputEmail.clear()
+    SignInPage.labelValidationEmail.should('have.text', 'Required').should('be.visible')
+    SignInPage.buttonSubmit.should('be.disabled')
 
-    cy.get('#normal_login_password').clear()
-    cy.get('#normal_login_password_help').should('have.text', 'Required').should('be.visible')
-    cy.get('.login-form-button').should('be.disabled')
+    SignInPage.inputPassword.clear()
+    SignInPage.labelValidationPassword.should('have.text', 'Required').should('be.visible')
+    SignInPage.buttonSubmit.should('be.disabled')
   })
 })

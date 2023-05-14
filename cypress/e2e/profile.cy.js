@@ -1,7 +1,9 @@
+import ProfilePage from '../pages/profile'
+
 describe('Profile', () => {
   beforeEach(() => {
     cy.loginByToken()
-    cy.visit(`/profile/${Cypress.env('userId')}`)
+    ProfilePage.open()
   })
 
   it('Sign out', () => {
