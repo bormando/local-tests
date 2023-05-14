@@ -1,8 +1,8 @@
+import SignInPage from '../pages/sign-in'
+
 Cypress.Commands.add('loginByCredentials', (email, password) => {
-  cy.visit('/user/login')
-  cy.get('#normal_login_email').type(email)
-  cy.get('#normal_login_password').type(password)
-  cy.get('.login-form-button').click()
+  SignInPage.open()
+  SignInPage.signIn(email, password)
 })
 
 Cypress.Commands.add('loginByToken', () => {
