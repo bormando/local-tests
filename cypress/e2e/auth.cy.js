@@ -1,5 +1,4 @@
-import SignInPage from '../pages/sign-in'
-import ProfilePage from '../pages/profile'
+import {SignInPage, ProfilePage} from '../pages'
 
 describe('Auth', () => {
   beforeEach(() => {
@@ -14,9 +13,7 @@ describe('Auth', () => {
   it('Sign in with incorrect credentials', () => {
     SignInPage.signIn(Cypress.env('email'), '123456')
 
-    cy.get('.ant-notification-notice-message')
-      .should('have.text', 'Auth failed')
-      .should('be.visible')
+    SignInPage.toast.should('have.text', 'Auth failed').should('be.visible')
   })
 
   it('Sign in form validation', () => {

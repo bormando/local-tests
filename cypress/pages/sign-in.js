@@ -1,4 +1,6 @@
-class SignInPage {
+import BasePage from './base'
+
+export const SignInPage = new (class extends BasePage {
   get inputEmail() {
     return cy.get('#normal_login_email')
   }
@@ -24,6 +26,4 @@ class SignInPage {
     this.inputPassword.type(password)
     this.buttonSubmit.click()
   }
-}
-
-export default new SignInPage()
+})()

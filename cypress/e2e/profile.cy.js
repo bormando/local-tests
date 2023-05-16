@@ -1,4 +1,4 @@
-import ProfilePage from '../pages/profile'
+import {ProfilePage} from '../pages'
 
 describe('Profile', () => {
   beforeEach(() => {
@@ -7,8 +7,8 @@ describe('Profile', () => {
   })
 
   it('Sign out', () => {
-    cy.get('a > .ms-2').click()
-    cy.get('[data-qa="logout"]').click()
+    ProfilePage.navbar.dropdownUsername.click()
+    ProfilePage.navbar.buttonLogOut.click()
 
     cy.location('pathname').should('eq', '/')
   })
