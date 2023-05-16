@@ -1,4 +1,4 @@
-import SignInPage from '../pages/sign-in'
+import {SignInPage} from '../pages'
 
 Cypress.Commands.add('loginByCredentials', (email, password) => {
   SignInPage.open()
